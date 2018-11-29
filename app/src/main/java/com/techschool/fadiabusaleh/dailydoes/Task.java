@@ -7,6 +7,19 @@ public class Task {
     String timeStamp;// = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
     int important;
 
+    public Task(String category,
+                String sbjct,
+                String txt,
+                String timeStamp,
+                int important) {
+        this.category=category;
+        this.sbjct=sbjct;
+        this.txt=txt;
+        this.timeStamp=timeStamp;
+        this.important=important;
+
+    }
+
     public int getStats() {
         return stats;
     }
