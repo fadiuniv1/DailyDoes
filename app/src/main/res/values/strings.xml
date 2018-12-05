@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">DailyDoes</string>
+
+
+    <string-array name="category_array">
+        <item>Call</item>
+        <item>Lunch</item>
+        <item>Meeting</item>
+        <item>Homework</item>
+        <item>Assignment</item>
+        <item>Sport</item>
+        <item>ToDo</item>
+    </string-array>
+    <string name="title_activity_float">Float</string>
 </resources>

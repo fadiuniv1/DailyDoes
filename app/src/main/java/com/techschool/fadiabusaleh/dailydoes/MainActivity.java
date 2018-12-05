@@ -1,10 +1,12 @@
 package com.techschool.fadiabusaleh.dailydoes;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,23 +24,18 @@ import static android.content.ContentValues.TAG;
 public class MainActivity extends Activity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("message");
     DatabaseReference Add = database.getReference("Added");
-    TaskAdapter taskadapter;
-    ListView Tasklist;
-    TextView txv2,txv;
-
-
+    TextView txv;
+    FloatingActionButton fab;
+Button btn2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Tasklist = (ListView) findViewById(R.id.tasks);
         Button btn = (Button) findViewById(R.id.button);
-        Button btn2 = (Button) findViewById(R.id.button2);
-
          txv = (TextView) findViewById(R.id.textView);
-         txv2 = (TextView) findViewById(R.id.textView2);
+         btn2 = (Button)findViewById(R.id.button2);
+
 
         Task tk = new Task("Homework", "Programming HW", "write your HW fast", "20/10/2019", 1,0);
         FirebaseDatabase.getInstance().getReference().child("Tasks").setValue(tk);
@@ -48,6 +45,17 @@ public class MainActivity extends Activity {
                 ReadData();
             }
         });
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddTaskActv();
+            }
+        });
+        //Trying to Add FloatingButtonAction
+
+
+
     }
 
     private void ReadData() {
@@ -66,4 +74,8 @@ public class MainActivity extends Activity {
         });
     }
 
+    private void AddTaskActv(){
+        Intent intent = new Intent(this, AddTask.class);
+        startActivity(intent);
+    }
 }
