@@ -6,18 +6,21 @@ public class Task {
     String txt;
     String timeStamp;// = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
     int important;
+    int stats;
+
+    public Task(){}
 
     public Task(String category,
                 String sbjct,
                 String txt,
                 String timeStamp,
-                int important) {
-        this.category=category;
-        this.sbjct=sbjct;
-        this.txt=txt;
-        this.timeStamp=timeStamp;
-        this.important=important;
-
+                int important, int stats) {
+        this.category = category;
+        this.sbjct = sbjct;
+        this.txt = txt;
+        this.timeStamp = timeStamp;
+        this.important = important;
+        this.stats = stats;
     }
 
     public int getStats() {
@@ -27,9 +30,6 @@ public class Task {
     public void setStats(int aStats) {
         this.stats = aStats;
     }
-
-    int stats;
-
 
     public String getCategory() {
         return category;
