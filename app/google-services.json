@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "598237258538",
+    "firebase_url": "https://dailydoes-29f35.firebaseio.com",
+    "project_id": "dailydoes-29f35",
+    "storage_bucket": "dailydoes-29f35.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:598237258538:android:dda51ee08bf0b8e2",
+        "android_client_info": {
+          "package_name": "com.techschool.fadiabusaleh.dailydoes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "598237258538-su7s8dgchk9f51epdi1g9jrkepe4vg2l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.techschool.fadiabusaleh.dailydoes",
+            "certificate_hash": "1c88c4b6bf0be905e4e79708a6879404366d6a53"
+          }
+        },
+        {
+          "client_id": "598237258538-f8ejtb31cd81gem6r77n191ihdp1s9va.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_Vf686bvKX5zSlue2d9GsuSgt1Qsif04"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "598237258538-f8ejtb31cd81gem6r77n191ihdp1s9va.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
