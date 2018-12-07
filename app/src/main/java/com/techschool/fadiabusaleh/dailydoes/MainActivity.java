@@ -21,42 +21,38 @@ import com.google.firebase.database.ValueEventListener;
 
 import static android.content.ContentValues.TAG;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference Add = database.getReference("Added");
     TextView txv;
     FloatingActionButton fab;
-Button btn2;
+
+    ListView lv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button btn = (Button) findViewById(R.id.button);
-         txv = (TextView) findViewById(R.id.textView);
-         btn2 = (Button)findViewById(R.id.button2);
+
+        lv =(ListView)findViewById(R.id.listview);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
 
 
-        Task tk = new Task("Homework", "Programming HW", "write your HW fast", "20/10/2019", 1,0);
+
+        Task tk = new Task("Homework", "Programming HW", "write your HW fast", "20/10/2019", 1, 0);
         FirebaseDatabase.getInstance().getReference().child("Tasks").setValue(tk);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ReadData();
-            }
-        });
 
-        btn2.setOnClickListener(new View.OnClickListener() {
+
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AddTaskActv();
             }
         });
-        //Trying to Add FloatingButtonAction
-
-
 
     }
+
 
     private void ReadData() {
         FirebaseDatabase.getInstance().getReference().child("Tasks").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -73,8 +69,7 @@ Button btn2;
             }
         });
     }
-
-    private void AddTaskActv(){
+    private void AddTaskActv() {
         Intent intent = new Intent(this, AddTask.class);
         startActivity(intent);
     }
