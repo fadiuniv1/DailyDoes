@@ -2,11 +2,15 @@ package com.techschool.fadiabusaleh.dailydoes;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Spinner;
+
+import com.google.firebase.database.FirebaseDatabase;
 
 public class AddTask extends Activity {
     Spinner catg;
@@ -14,6 +18,9 @@ public class AddTask extends Activity {
     EditText txt;
     CheckBox done;
     RatingBar important;
+    Button save;
+
+    Task tk;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +30,8 @@ public class AddTask extends Activity {
         txt = (EditText)findViewById(R.id.text);
         done = (CheckBox)findViewById(R.id.done);
         important = (RatingBar)findViewById(R.id.important);
+        save =(Button) findViewById(R.id.saveTask);
+
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -31,5 +40,20 @@ public class AddTask extends Activity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
         catg.setAdapter(adapter);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tk = new Task();
+                tk.setCategory((String) catg.getSelectedItem());
+                tk.setSbjct(title.getText().toString());
+                tk.setTxt(txt.getText().toString());
+                tk.setImportant((int)important.getNumStars());
+                FirebaseDatabase.getInstance().getReference().child("Tasks1").setValue(tk);
+
+            }
+        });
+
     }
+
+
 }
