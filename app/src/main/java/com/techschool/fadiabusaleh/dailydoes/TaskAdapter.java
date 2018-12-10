@@ -7,7 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -18,7 +21,7 @@ public class TaskAdapter<T> extends BaseAdapter {
     private ArrayList<Task> data;
     private Context mContext;
     TaskAdapter<Task> taskAdapter =
-            new TaskAdapter<Task>(mContext,data);
+            new TaskAdapter<Task>(mContext, data);
 
     public TaskAdapter(Context aContex, ArrayList<Task> aArrayListTasks) {
         mContext = aContex;
@@ -42,21 +45,27 @@ public class TaskAdapter<T> extends BaseAdapter {
     }
 
     @Override
-    public View getView(int aI, View aView, ViewGroup aViewGroup){
-        View resultView;
-        LayoutInflater layoutInflater;
+    public View getView(int aI, View aView, ViewGroup aViewGroup) {
+        View listItem = aView;
+        if (listItem == null)
+            listItem = LayoutInflater.from(mContext).inflate(R.layout.row_item, aViewGroup, false);
 
-        Log.d( TAG, "getview : " + String.valueOf( aI));
+        Task tk = data.get(aI);
 
-        if (aView == null){
-            Log.d( TAG, "getview : " + String.valueOf( aI) + " created !!!");
-            layoutInflater = (LayoutInflater) mContext.getSystemService( Context.LAYOUT_INFLATER_SERVICE);
-            resultView = layoutInflater.inflate( android.R.layout.simple_list_item_1, null);
-        } else {
-            resultView = aView;
-        }
+        TextView catg = (TextView) listItem.findViewById(R.id.tk_catg);
+        catg.setText(tk.getCategory());
+        TextView titl = (TextView) listItem.findViewById(R.id.tk_title);
+        titl.setText(tk.getSbjct());
+        CheckBox chk = (CheckBox) listItem.findViewById(R.id.tk_done);
+        if (tk.stats == 0) {
+            chk.setChecked(false);
+        } else chk.setChecked(true);
 
-        return resultView;
+        TextView date = (TextView) listItem.findViewById(R.id.tk_date);
+
+
+        return listItem;
+
     }
 
 }
