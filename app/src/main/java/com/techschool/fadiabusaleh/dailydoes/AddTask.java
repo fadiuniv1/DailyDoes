@@ -26,6 +26,7 @@ public class AddTask extends Activity {
     DatabaseReference db;
     FireBaseHelper helper;
 
+    TaskAdapter adapterTk;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +64,7 @@ public class AddTask extends Activity {
                 if (done.isChecked())
                     dn = 1;
                 else dn = 0;
-                int star = (int) important.getNumStars();
+                double star =important.getNumStars();
 
 
                 //SET DATA
@@ -78,9 +79,11 @@ public class AddTask extends Activity {
                 if (titl != null && titl.length() > 0) {
                     //THEN SAVE
                     helper.save(s);
+
                 } else {
                     Toast.makeText(AddTask.this, "Name Must Not Be Empty", Toast.LENGTH_SHORT).show();
                 }
+
                 finish();
             }
         });

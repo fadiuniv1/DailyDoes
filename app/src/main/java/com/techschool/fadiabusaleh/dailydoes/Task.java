@@ -5,7 +5,7 @@ public class Task {
     String sbjct;
     String txt;
     String timeStamp;// = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-    int important;
+    double important;
     int stats;
 
     public Task(){}
@@ -63,11 +63,11 @@ public class Task {
         this.timeStamp = aTimeStamp;
     }
 
-    public int getImportant() {
+    public double getImportant() {
         return important;
     }
 
-    public void setImportant(int aImportant) {
+    public void setImportant(double aImportant) {
         this.important = aImportant;
     }
 

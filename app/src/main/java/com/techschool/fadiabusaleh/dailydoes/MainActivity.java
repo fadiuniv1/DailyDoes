@@ -40,20 +40,26 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
         lv = (ListView) findViewById(R.id.listview);
         fab = (FloatingActionButton) findViewById(R.id.fab);
-        //lv.setAdapter(new TaskAdapter(this,tkList));
-
-
         db = database.getReference();
         helper = new FireBaseHelper(db);
-
         //ADAPTER
         adapter = new TaskAdapter(MainActivity.this, helper.retrieve());
-        lv.setAdapter(adapter);
 
+        lv.setAdapter(adapter);
+        FirebaseDatabase.getInstance().getReference().child("Tasks").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                lv.setAdapter(adapter);
+                ReadData();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w(TAG, "LoadTask:onCancelled", databaseError.toException());
+            }
+        });
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 lv.setAdapter(adapter);
+                ReadData();
             }
 
             @Override
