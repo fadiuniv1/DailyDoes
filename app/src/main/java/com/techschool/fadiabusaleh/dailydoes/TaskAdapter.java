@@ -14,14 +14,13 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
-public class TaskAdapter<T> extends BaseAdapter {
+public class TaskAdapter extends BaseAdapter {
     private static final String TAG = "TasksAdapter";
 
 
     private ArrayList<Task> data;
     private Context mContext;
-    TaskAdapter<Task> taskAdapter =
-            new TaskAdapter<Task>(mContext, data);
+
 
     public TaskAdapter(Context aContex, ArrayList<Task> aArrayListTasks) {
         mContext = aContex;
@@ -50,18 +49,19 @@ public class TaskAdapter<T> extends BaseAdapter {
         if (listItem == null)
             listItem = LayoutInflater.from(mContext).inflate(R.layout.row_item, aViewGroup, false);
 
-        Task tk = data.get(aI);
 
         TextView catg = (TextView) listItem.findViewById(R.id.tk_catg);
-        catg.setText(tk.getCategory());
         TextView titl = (TextView) listItem.findViewById(R.id.tk_title);
-        titl.setText(tk.getSbjct());
         CheckBox chk = (CheckBox) listItem.findViewById(R.id.tk_done);
+        TextView date = (TextView) listItem.findViewById(R.id.tk_date);
+        Task tk = data.get(aI);
+
+        titl.setText(tk.getSbjct());
         if (tk.stats == 0) {
             chk.setChecked(false);
         } else chk.setChecked(true);
+        catg.setText(tk.getCategory());
 
-        TextView date = (TextView) listItem.findViewById(R.id.tk_date);
 
 
         return listItem;
