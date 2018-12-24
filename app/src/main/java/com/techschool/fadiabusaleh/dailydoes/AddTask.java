@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -25,12 +26,16 @@ public class AddTask extends Activity {
     Task tk;
     DatabaseReference db;
     FireBaseHelper helper;
-
+    ListView lv;
     TaskAdapter adapterTk;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
+        lv = findViewById(R.id.listview);
+
+
         catg = (Spinner) findViewById(R.id.category);
         title = (EditText) findViewById(R.id.title);
         txt = (EditText) findViewById(R.id.text);
@@ -64,7 +69,7 @@ public class AddTask extends Activity {
                 if (done.isChecked())
                     dn = 1;
                 else dn = 0;
-                double star =important.getNumStars();
+                double star = important.getNumStars();
 
 
                 //SET DATA
@@ -75,17 +80,22 @@ public class AddTask extends Activity {
                 s.setStats(dn);
                 s.setImportant(star);
 
-//SIMPLE VALIDATION
+                //SIMPLE VALIDATION
                 if (titl != null && titl.length() > 0) {
                     //THEN SAVE
                     helper.save(s);
+                    finish();
 
                 } else {
                     Toast.makeText(AddTask.this, "Name Must Not Be Empty", Toast.LENGTH_SHORT).show();
+
                 }
 
-                finish();
             }
         });
     }
+
+
+
+
 }
