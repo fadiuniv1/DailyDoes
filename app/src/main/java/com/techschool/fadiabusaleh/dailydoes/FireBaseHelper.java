@@ -2,6 +2,7 @@
 package com.techschool.fadiabusaleh.dailydoes;
 
 import android.content.DialogInterface;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -33,6 +34,7 @@ public class FireBaseHelper {
         this.db = db;
     }
 
+
     //WRITE
     public Boolean save(Task task) {
         if (task == null) {
@@ -41,7 +43,7 @@ public class FireBaseHelper {
             try {
                 String st = db.child( "Tasks" ).push().getKey();
                 db.child( "Tasks" ).child( st ).setValue( task );
-                keyList.add( st );
+                //keyList.add( st );
                 saved = true;
 
 
@@ -56,10 +58,14 @@ public class FireBaseHelper {
 
     //READ
     public ArrayList<Task> retrieve() {
+
         db.addChildEventListener( new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
                 fetchData( dataSnapshot );
+
+
 
 
             }
@@ -75,6 +81,7 @@ public class FireBaseHelper {
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
 
+                String s = dataSnapshot.getValue().toString();
 
             }
 
@@ -94,21 +101,20 @@ public class FireBaseHelper {
 
     public void DeleteD(int position) {
 
-        int deletePosition = position;
-        String st = keyList.get( deletePosition );
+        String st = keyList.get( position );
         db.child( "Tasks" ).child( st ).removeValue();
-        if(keyList.get( deletePosition ).equals( st )){
-            keyList.remove( deletePosition );
+        if(keyList.get( position ).equals( st )){
+            keyList.remove( position);
         }
-
 
     }
 
     private void fetchData(DataSnapshot dataSnapshot) {
-        //taskArrayList.clear();
+        taskArrayList.clear();
 
         for (DataSnapshot ds : dataSnapshot.getChildren()) {
             Task tk = ds.getValue( Task.class );
+            keyList.add( ds.getKey() );
             taskArrayList.add( tk );
         }
     }
